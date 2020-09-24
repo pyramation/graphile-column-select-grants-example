@@ -72,7 +72,7 @@
     "envalid": "^6.0.2",
     "express": "^4.17.1",
     "graphile-build": "^4.9.0",
-    "graphile-column-privileges-mutations": "^0.0.1",
+    "graphile-column-privileges-mutations": "^0.0.3",
     "postgraphile": "^4.9.0"
   }
 }

@@ -26,7 +26,7 @@ mutation CreateUserMutation {
   createUser(
     input: {
       user: {
-        email: "pyramation@gmail.com"
+        email: "pyramation@example.com"
         username: "pyramation"
         password:"password"
       }
@@ -50,7 +50,7 @@ which returns happily
       "user": {
         "id": 5,
         "username": "pyramation",
-        "email": "pyramation@gmail.com"
+        "email": "pyramation@example.com"
       }
     }
   }
@@ -64,7 +64,7 @@ mutation CreateUserMutation {
   createUser(
     input: {
       user: {
-        email: "pyramation@gmail.com"
+        email: "pyramation@example.com"
         username: "pyramation"
         password:"password"
       }
