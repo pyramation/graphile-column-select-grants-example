@@ -1,5 +1,8 @@
 # graphile-mutation-example
 
+example for 
+https://github.com/pyramation/graphile-column-privileges-mutations
+
 ## seed db
 
 ```sh
