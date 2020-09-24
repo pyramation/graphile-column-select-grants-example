@@ -1,9 +1,9 @@
 {
-  "name": "graphile-mutation-example",
+  "name": "graphile-column-select-grants-example",
   "version": "0.0.1",
   "description": "graphile mutation example",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/pyramation/graphile-mutation-example#readme",
+  "homepage": "https://github.com/pyramation/graphile-column-select-grants-example#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -20,7 +20,8 @@
     "build:module": "MODULE=true babel src --out-dir module --delete-dir-on-start",
     "build": "npm run build:module && npm run build:main",
     "prepublish": "npm run build",
-    "dev": "NODE_ENV=development babel-node src/server",
+    "app_user": "PGUSER=app_user PGPASSWORD=app_password NODE_ENV=development babel-watch src/server",
+    "admin_user": "NODE_ENV=development babel-watch src/server",
     "watch": "NODE_ENV=development babel-watch src/server",
     "start": "node main/server",
     "lint": "eslint src --fix",
@@ -33,11 +34,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pyramation/graphile-mutation-example"
+    "url": "https://github.com/pyramation/graphile-column-select-grants-example"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/pyramation/graphile-mutation-example/issues"
+    "url": "https://github.com/pyramation/graphile-column-select-grants-example/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.10.4",
@@ -68,8 +69,10 @@
   "dependencies": {
     "@babel/runtime": "^7.4.2",
     "debug": "^4.2.0",
+    "envalid": "^6.0.2",
     "express": "^4.17.1",
     "graphile-build": "^4.9.0",
+    "graphile-column-privileges-mutations": "^0.0.1",
     "postgraphile": "^4.9.0"
   }
 }

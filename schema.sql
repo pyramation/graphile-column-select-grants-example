@@ -1,32 +1,20 @@
--- https://en.wikipedia.org/wiki/Role-based_access_control
 BEGIN;
-CREATE EXTENSION citext;
-CREATE TABLE subjects (
+CREATE EXTENSION IF NOT EXISTS citext;
+DROP SCHEMA IF EXISTS app_public CASCADE;
+CREATE SCHEMA app_public;
+GRANT usage ON SCHEMA app_public TO authenticated;
+CREATE TABLE app_public.users (
     id serial PRIMARY KEY,
-    username citext
+    username citext,
+    email citext,
+    PASSWORD text,
+    UNIQUE (username),
+    UNIQUE (email)
 );
-COMMENT ON TABLE subjects IS 'A person or automated agent';
-CREATE TABLE roles (
-    id serial PRIMARY KEY,
-    org_id bigint NOT NULL REFERENCES subjects (id)
-);
-COMMENT ON TABLE roles IS 'Job function or title which defines an authority level';
-CREATE TABLE permissions (
-    id serial PRIMARY KEY,
-    name citext
-);
-COMMENT ON TABLE permissions IS 'An approval of a mode of access to a resource';
-CREATE TABLE permission_assignment (
-    perm_id bigint NOT NULL REFERENCES permissions (id),
-    role_id bigint NOT NULL REFERENCES roles (id),
-    PRIMARY KEY (perm_id, role_id)
-);
-COMMENT ON TABLE permission_assignment IS 'Permission Assignment';
-CREATE TABLE subject_assignment (
-    subj_id bigint NOT NULL REFERENCES subjects (id),
-    role_id bigint NOT NULL REFERENCES roles (id),
-    PRIMARY KEY (subj_id, role_id)
-);
-COMMENT ON TABLE subject_assignment IS 'Subject Assignment';
+GRANT INSERT ON TABLE app_public.users TO authenticated;
+GRANT SELECT (id, username, email) ON TABLE app_public.users TO authenticated;
+GRANT UPDATE (username, email, PASSWORD) ON TABLE app_public.users TO authenticated;
+GRANT DELETE ON TABLE app_public.users TO authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA app_public TO authenticated;
 COMMIT;
 

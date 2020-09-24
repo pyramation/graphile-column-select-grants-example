@@ -1,18 +1,24 @@
 import express from 'express';
 import { postgraphile } from 'postgraphile';
-import { NodePlugin } from 'graphile-build';
-// import { MutationPlugin } from 'graphile-build';
-import PgMutationUpdateDeletePlugin from './plugins/PgMutationUpdateDeletePlugin';
-import PgMutationCreatePlugin from './plugins/PgMutationCreatePlugin';
+
+import {
+  PgMutationUpdateDeletePlugin,
+  PgMutationCreatePlugin
+} from 'graphile-column-privileges-mutations';
+
 import PgSimplifyInflectorPlugin from './plugins/PgSimplifyInflectorPlugin';
+import env from './env';
+
 const app = express();
 
+const getDbString = () =>
+  `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT}/${env.PGDATABASE}`;
+
 app.use(
-  postgraphile('postgres://localhost:5432/mutation_example', 'public', {
+  postgraphile(getDbString(), env.SCHEMA, {
     graphiql: true,
     enhanceGraphiql: true,
     enableCors: true,
-    // skipPlugins: [NodePlugin],
     dynamicJson: true,
     appendPlugins: [
       PgSimplifyInflectorPlugin,
